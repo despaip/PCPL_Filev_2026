@@ -39,22 +39,25 @@ func getRoots(a, b, c float64) []float64 {
 	D := b*b - 4*a*c
 
 	if D > 0 {
-		root1 := (-b + math.Sqrt(D)) / (2 * a)
-		root2 := (-b - math.Sqrt(D)) / (2 * a)
-		roots = append(roots, root1, root2)
+		root1 := math.Sqrt((-b + math.Sqrt(D)) / (2 * a))
+		root2 := math.Sqrt((-b - math.Sqrt(D)) / (2 * a))
+		root3 := -root1
+		root4 := -root2
+		roots = append(roots, root1, root2, root3, root4)
 	} else if D == 0 {
-		root := -b / (2 * a)
-		roots = append(roots, root)
+		root1 := math.Sqrt(-b / (2 * a))
+		root2 := -root1
+		roots = append(roots, root1, root2)
 	}
 
 	return roots
 }
 
 func printRoots(roots []float64) {
-	if len(roots) == 2 {
+	if len(roots) == 4 {
+		fmt.Printf("Found 4 roots: %f, %f, %f and %f.\n", roots[0], roots[1], roots[2], roots[3])
+	} else if len(roots) == 2 {
 		fmt.Printf("Found 2 roots: %f and %f.\n", roots[0], roots[1])
-	} else if len(roots) == 1 {
-		fmt.Printf("Found 1 root: %f.\n", roots[0])
 	} else {
 		fmt.Println("No roots were found.")
 	}

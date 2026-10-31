@@ -24,22 +24,25 @@ def get_roots(a, b, c):
     D = b**2 - 4*a*c
 
     if D > 0:
-        root1 = (-b + math.sqrt(D)) / (2*a)
-        root2 = (-b - math.sqrt(D)) / (2*a)
-        return ('2 roots', root1, root2)
+        root1 = math.sqrt((-b + math.sqrt(D)) / (2*a))
+        root2 = math.sqrt((-b - math.sqrt(D)) / (2*a))
+        root3 = -root1
+        root4 = -root2
+        return ('4 roots', root1, root2, root3, root4)
 
     elif D == 0:
-        root = -b / (2*a)
-        return ('1 root', root)
+        root1 = math.sqrt(-b / (2*a))
+        root2 = -root1
+        return ('2 root', root1, root2)
     else:
         return ('no roots')
 
 def print_roots(result_tuple):
     match result_tuple:
-        case ('2 roots', root1, root2):
-            print(f"Found 2 roots: {result_tuple[1]} and {result_tuple[2]}")
-        case ('1 root', root):
-            print(f"Found 1 root: {result_tuple[1]}")
+        case ('4 roots', root1, root2, root3, root4):
+            print(f"Found 4 roots: {result_tuple[1]}, {result_tuple[2]}, {result_tuple[3]} and {result_tuple[4]}")
+        case ('2 root', root1, root2):
+           print(f"Found 2 roots: {result_tuple[1]} and {result_tuple[2]}")
         case ('no roots'):
             print("No roots were found")
 

@@ -21,24 +21,30 @@ def get_roots(a, b, c):
     roots =[]
 
     if D > 0:
-        root1 = (-b + math.sqrt(D)) / (2*a)
-        root2 = (-b - math.sqrt(D)) / (2*a)
+        root1 = math.sqrt((-b + math.sqrt(D)) / (2*a))
+        root2 = math.sqrt((-b - math.sqrt(D)) / (2*a))
+        root3 = -root1
+        root4 = -root2
         roots.append(root1)
         roots.append(root2)
+        roots.append(root3)
+        roots.append(root4)
 
     elif D == 0:
-        root = -b / (2*a)
-        roots.append(root)
+        root1 = math.sqrt(-b / (2*a))
+        root2 = -root1
+        roots.append(root1)
+        roots.append(root2)
 
     return roots
 
 def print_roots(roots):
     roots_len = len(roots)
 
-    if roots_len == 2:
+    if roots_len == 4:
+        print(f"Found 4 roots: {roots[0]}, {roots[1]}, {roots[2]} and {roots[3]}")
+    elif roots_len == 2:
         print(f"Found 2 roots: {roots[0]} and {roots[1]}")
-    elif roots_len == 1:
-        print("Found 1 root:", *roots)
     else:
         print("No roots were found")
 

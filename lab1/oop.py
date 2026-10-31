@@ -27,20 +27,26 @@ class SquareEquation:
     def get_roots(self):
         D = self.b**2 - 4*self.a*self.c
         if D > 0:
-            root1 = (-self.b + math.sqrt(D)) / (2*self.a)
-            root2 = (-self.b - math.sqrt(D)) / (2*self.a)
+            root1 = math.sqrt((-self.b + math.sqrt(D)) / (2*self.a))
+            root2 = math.sqrt((-self.b - math.sqrt(D)) / (2*self.a))
+            root3 = -root1
+            root4 = -root2
             self.roots.append(root1)
             self.roots.append(root2)
+            self.roots.append(root3)
+            self.roots.append(root4)
         elif D == 0:
-            root = -self.b / (2*self.a)
-            self.roots.append(root)
+            root1 = math.sqrt(-self.b / (2*self.a))
+            root2 = -root1
+            self.roots.append(root1)
+            self.roots.append(root2)
 
     def print_roots(self):
         roots_len = len(self.roots)
-        if roots_len == 2:
+        if roots_len == 4:
+            print(f"Found 4 roots: {self.roots[0]}, {self.roots[1]}, {self.roots[2]} and {self.roots[3]}")
+        elif roots_len == 2:
             print(f"Found 2 roots: {self.roots[0]} and {self.roots[1]}")
-        elif roots_len == 1:
-            print("Found 1 root:", *self.roots)
         else:
             print("No roots were found")
 
