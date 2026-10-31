@@ -25,24 +25,35 @@ students_groups = [StudentGroup(1, 1), StudentGroup(1, 2), StudentGroup(2, 1),
 
 def main():
     one_to_many = [(student.name, student.average_grade, group.name)
-                    for student in students for group in groups if student.group_id == group.id]
-    many_to_many = [(student.name, student.average_grade, group.name) for student in students for group in groups
-                    for student_group in students_groups if student.id == student_group.student_id
+                    for student in students for group in groups
+                    if student.group_id == group.id]
+    many_to_many = [(student.name, student.average_grade, group.name)
+                    for student in students for group in groups
+                    for student_group in students_groups
+                    if student.id == student_group.student_id
                     and group.id == student_group.group_id]
 
     print("Задание 1:")
-    students_ov = [(student[0], student[2]) for student in one_to_many if student[0][-2:] == "ov"]
+    students_ov = [(student[0], student[2]) for student in one_to_many
+                   if student[0][-2:] == "ov"]
     print(students_ov)
 
     print("Задание 2:")
-    groups_average_unsorted = [(group.name, sum(student.average_grade for student in students if student.group_id == group.id) /
-                      sum(1 for student in students if student.group_id == group.id)) for group in groups]
+    groups_average_unsorted = [(group.name,
+                                sum(student.average_grade
+                                    for student in students
+                                    if student.group_id == group.id) /
+                                sum(1 for student in students
+                                    if student.group_id == group.id))
+                                for group in groups]
     groups_average_sorted = sorted(groups_average_unsorted, key = lambda x: x[1])
     print(groups_average_sorted)
 
     print("Задание 3:")
-    groups_A = [(group.name, [student[0] for student in many_to_many if student[2] == group.name])
+    groups_A = [(group.name, [student[0] for student in many_to_many
+                              if student[2] == group.name])
                 for group in groups if group.name[0] == "A"]
     print(groups_A)
+
 if __name__ == "__main__":
       main()
